@@ -139,11 +139,10 @@ def save_db(path, sql_data):
         db = sqlite3.connect(path)
         c = db.cursor()
         c.executescript(sql_data)
+        db.close()
     except sqlite3.OperationalError as e:
         print("ERROR creating sqlite DB file: {}").format(e)
         sys.exit(1)
-    finally:
-        db.close()
     return
 
 
