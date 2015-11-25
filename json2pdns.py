@@ -123,9 +123,9 @@ def make_sql(json_data):
     sql_data = DB_SCHEMA
     domain_id = 1
     for domain in json_data:
-        sql_data += "INSERT INTO domains (id,name,type) VALUES (%d,'%s','NATIVE');\n" % (domain_id, domain)
+        sql_data += "INSERT INTO domains (id,name,type) VALUES ({},'{}','NATIVE');\n".format(domain_id, domain)
         for record in json_data[domain]:
-            sql_data += "INSERT INTO records (content,ttl,type,domain_id,name) VALUES ('%s',%d,'%s',%d,'%s');\n" % (
+            sql_data += "INSERT INTO records (content,ttl,type,domain_id,name) VALUES ('{}', {}, '{}', {}, '{}');\n".format(
                 record["content"], record["ttl"], record["type"], domain_id,
                 record["name"], )
         domain_id += 1
